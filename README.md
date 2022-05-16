@@ -71,8 +71,8 @@ Since this module is unofficial, it is not guaranteed to work if the Urban Dicti
   * If `index` is out of range, raises an error.
   * If `block` is `True`, blocks until the sound is finished playing.
   * If `block` is `False`, returns immediately.
-
-<sub>Requires the playsound module.</sub>
+  
+  <sub>Requires the playsound module.</sub>
     
     
 ### Attributes
