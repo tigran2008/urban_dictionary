@@ -162,7 +162,7 @@ try:
             if isinstance(word, str):
                 url = define(word).sample_samples[index]
             elif isinstance(word, Definition):
-                url = word.sample_samples[index]
+                url = word.audio_samples[index]
             else:
                 raise TypeError('word must be a string or Definition')
         except IndexError:
