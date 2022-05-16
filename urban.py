@@ -189,34 +189,6 @@ except ImportError:
         
         print('\n')
 
-################################################################################
-
-def submit_word(word: str, definition: str, example: str, tags: list, giphy_url: str = None):
-    """Submit a word to Urban Dictionary.
-
-    Args:
-        word (str): The word to submit.
-        definition (str): The definition to submit.
-        example (str): The example to submit.
-        tags (list): The tags to submit.
-        giphy_url (str, optional): The Giphy URL to submit. Defaults to None.
-
-    Raises:
-        HTTPException: If the HTTP request fails (e.g. non-200 response).
-    """
-
-    url = 'http://api.urbandictionary.com/v0/define'
-    data = {
-        'term': word,
-        'definition': definition,
-        'example': example,
-        'tags': ','.join(tags),
-        'giphy': giphy_url if giphy_url else ''
-    }
-    response = requests.post(url, data=data)
-    if response.status_code != 200:
-        raise HTTPException(f'Error submitting word: {word} - HTTP status code: {response.status_code}')
-
 __doc__ = \
 """ Unofficial Urban Dictionary API wrapper.
 
