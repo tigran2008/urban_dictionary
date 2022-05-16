@@ -65,8 +65,8 @@ Since this module is unofficial, it is not guaranteed to work if the Urban Dicti
   * If `index` is out of range, raises an error.
   * If the definition is not found, raises an error.
         
-#### `play_tts(word, index: int = 0, block: bool = True)` <sub>`-> None`</sub>
-- Plays a sound from a definition's TTS samples.
+#### `play_sample(word, index: int = 0, block: bool = True)` <sub>`-> None`</sub>
+- Plays a sound from a definition's audio samples.
   * If the definition has no sound available, raises an error.
   * If `index` is out of range, raises an error.
   * If `block` is `True`, blocks until the sound is finished playing.
