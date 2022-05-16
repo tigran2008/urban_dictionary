@@ -92,7 +92,7 @@ Since this module is unofficial, it is not guaranteed to work if the Urban Dicti
   * `permalink`: Permanent link to the definition
   * `upvotes`: The amount of "thumbs up" ratings.
   * `downvotes`: The amount of "thumbs down" ratings.
-  * `audio_samples`: Links to audio samples of the word. Is used by `play_audio()`.
+  * `audio_samples`: Links to audio samples of the word. Is used by `play_sample()`.
   * `written_on`: `datetime.datetime` representation of the creation time of the definition.
   * `raw_data`: `dict` representation of the API's JSON response
   * `index`: The word's index
