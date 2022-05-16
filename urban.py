@@ -160,7 +160,7 @@ try:
         
         try:
             if isinstance(word, str):
-                url = define(word).sample_samples[index]
+                url = define(word).audio_samples[index]
             elif isinstance(word, Definition):
                 url = word.audio_samples[index]
             else:
@@ -224,17 +224,17 @@ __doc__ = \
         [[Methods]]
           todict() -> dict: Returns a dictionary representation of the definition.
         [[Properties]]
-          word:        The name of the definition. May have different capitalization from the original search and/or include other words
-          definition:  The definition of the searched word
-          example:     The example section of the definition
-          author:      The username of the creator of the definition
-          permalink:   Permanent link to the definition
-          upvotes:     The amount of "thumbs up" ratings.
-          downvotes:   The amount of "thumbs down" ratings.
-          sample_samples: Links to Sound samples of the word. Is used by 'play_sample()'.
-          written_on:  'datetime.datetime' representation of the creation time of the definition.
-          raw_data:    'dict' representation of the API's JSON response
-          index:       The word's index
+          word:          The name of the definition. May have different capitalization from the original search and/or include other words
+          definition:    The definition of the searched word
+          example:       The example section of the definition
+          author:        The username of the creator of the definition
+          permalink:     Permanent link to the definition
+          upvotes:       The amount of "thumbs up" ratings.
+          downvotes:     The amount of "thumbs down" ratings.
+          audio_samples: Links to Sound samples of the word. Is used by 'play_sample()'.
+          written_on:    'datetime.datetime' representation of the creation time of the definition.
+          raw_data:      'dict' representation of the API's JSON response
+          index:         The word's index
 
     
     [Exceptions]
