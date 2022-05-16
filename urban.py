@@ -169,11 +169,11 @@ try:
             raise DefinitionOutOfScopeError(f"{word} (TTS)", index)
         
         try:
-            file = tempfile.TemporaryFile("w+b")
+            file = tempfile.NamedTemporaryFile()
             file.write(requests.get(url).content)
             file.seek(0)
             
-            playsound(file, block=block)
+            playsound(file.name, block=block)
             
             file.close()
         except:
