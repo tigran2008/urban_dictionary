@@ -21,18 +21,18 @@ import tempfile
 ################################################################################
 
 class Definition:
-    def __init__(self, word: str, definition: str, example: str, author: str, permalink: str, upvotes: int, downvotes: int, tts_samples: list, written_on: datetime.datetime, raw_data: dict, index: int):
-        self.word        = word
-        self.definition  = definition
-        self.example     = example
-        self.author      = author
-        self.permalink   = permalink
-        self.upvotes     = upvotes
-        self.downvotes   = downvotes
-        self.tts_samples = tts_samples
-        self.written_on  = written_on
-        self.raw_data    = raw_data
-        self.index       = index
+    def __init__(self, word: str, definition: str, example: str, author: str, permalink: str, upvotes: int, downvotes: int, audio_samples: list, written_on: datetime.datetime, raw_data: dict, index: int):
+        self.word          = word
+        self.definition    = definition
+        self.example       = example
+        self.author        = author
+        self.permalink     = permalink
+        self.upvotes       = upvotes
+        self.downvotes     = downvotes
+        self.audio_samples = audio_samples
+        self.written_on    = written_on
+        self.raw_data      = raw_data
+        self.index         = index
     
     def todict(self):
         return {
@@ -43,7 +43,7 @@ class Definition:
             "permalink": self.permalink,
             "upvotes": self.upvotes,
             "downvotes": self.downvotes,
-            "tts_samples": self.tts_samples,
+            "sample_samples": self.sample_samples,
             "written_on": self.written_on,
             "raw_data": self.raw_data,
             "index": self.index
@@ -144,13 +144,13 @@ try:
         def __str__(self):
             return 'Definition has no sound available for word: ' + self.word
     
-    def play_tts(word, index: int = 0, block: bool = True):
-        """Play a definition's TTS sample.
+    def play_sample(word, index: int = 0, block: bool = True):
+        """Play a definition's Sound sample.
 
         Args:
-            word (str | Definition): The word to retrieve the TTS sample for.
+            word (str | Definition): The word to retrieve the Sound sample for.
             index (int, optional): The index of the definition to fetch. Defaults to 0. Ignored if word is a Definition object.
-            block (bool, optional): Whether to block the current thread until the TTS sample finishes playing. Defaults to True.
+            block (bool, optional): Whether to block the current thread until the Sound sample finishes playing. Defaults to True.
 
         Raises:
             TypeError: If word is not a string or a Definition object.
@@ -160,13 +160,13 @@ try:
         
         try:
             if isinstance(word, str):
-                url = define(word).tts_samples[index]
+                url = define(word).sample_samples[index]
             elif isinstance(word, Definition):
-                url = word.tts_samples[index]
+                url = word.sample_samples[index]
             else:
                 raise TypeError('word must be a string or Definition')
         except IndexError:
-            raise DefinitionOutOfScopeError(f"{word} (TTS)", index)
+            raise DefinitionOutOfScopeError(f"{word} (sample)", index)
         
         try:
             file = tempfile.NamedTemporaryFile()
@@ -183,13 +183,39 @@ except ImportError:
     if WARN_IF_PLAYSOUND_IS_UNAVAILABLE:
         print("urban: WARNING: 'playsound' module could not be found.", end = "\n" * 2)
         
-        print("                 This module is required for play_tts() to work.")
+        print("                 This module is required for play_sample() to work.")
         print("                 Please install it using pip3 install playsound.")
         print("                 If you do not want to see this message again, set WARN_IF_PLAYSOUND_IS_UNAVAILABLE to False in urban.py")
         
         print('\n')
 
 ################################################################################
+
+def submit_word(word: str, definition: str, example: str, tags: list, giphy_url: str = None):
+    """Submit a word to Urban Dictionary.
+
+    Args:
+        word (str): The word to submit.
+        definition (str): The definition to submit.
+        example (str): The example to submit.
+        tags (list): The tags to submit.
+        giphy_url (str, optional): The Giphy URL to submit. Defaults to None.
+
+    Raises:
+        HTTPException: If the HTTP request fails (e.g. non-200 response).
+    """
+
+    url = 'http://api.urbandictionary.com/v0/define'
+    data = {
+        'term': word,
+        'definition': definition,
+        'example': example,
+        'tags': ','.join(tags),
+        'giphy': giphy_url if giphy_url else ''
+    }
+    response = requests.post(url, data=data)
+    if response.status_code != 200:
+        raise HTTPException(f'Error submitting word: {word} - HTTP status code: {response.status_code}')
 
 __doc__ = \
 """ Unofficial Urban Dictionary API wrapper.
@@ -206,8 +232,8 @@ __doc__ = \
             If index is out of range, raises an error.
             If the definition is not found, raises an error.
         
-        play_tts(word, index: int = 0, block: bool = True)
-            Plays a sound from a definition's TTS samples.
+        play_sample(word, index: int = 0, block: bool = True)
+            Plays a sound from a definition's Sound samples.
             If the definition has no sound available, raises an error.
             If index is out of range, raises an error.
             If block is True, blocks until the sound is finished playing.
@@ -233,7 +259,7 @@ __doc__ = \
           permalink:   Permanent link to the definition
           upvotes:     The amount of "thumbs up" ratings.
           downvotes:   The amount of "thumbs down" ratings.
-          tts_samples: Links to TTS samples of the word. Is used by 'play_tts()'.
+          sample_samples: Links to Sound samples of the word. Is used by 'play_sample()'.
           written_on:  'datetime.datetime' representation of the creation time of the definition.
           raw_data:    'dict' representation of the API's JSON response
           index:       The word's index
@@ -252,4 +278,4 @@ __doc__ = \
 
 __author__  = "Tigran Khachatryan"
 __version__ = "0.2.0"
-__all__     = ["define", "play_tts", "Definition", "DefinitionNotFoundError", "DefinitionOutOfScopeError", "DefinitionNoSoundAvailableError"]
+__all__     = ["define", "play_sample", "Definition", "DefinitionNotFoundError", "DefinitionOutOfScopeError", "DefinitionNoSoundAvailableError"]
