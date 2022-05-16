@@ -30,7 +30,7 @@ print("The word 'hello' has {} definitions in Urban Dictionary.".format(def_amou
 import urban
 
 hello = urban.define('hello')
-urban.play_tts(hello)
+urban.play_sample(hello)
 ```
 
 ```py
