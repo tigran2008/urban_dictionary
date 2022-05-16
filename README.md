@@ -82,20 +82,20 @@ Since this module is unofficial, it is not guaranteed to work if the Urban Dicti
 ### Classes
 
 `Definition`: Represents a definition from Urban Dictionary.
-* Methods
- * `todict()` <sub>`-> dict`</sub>: Returns a dictionary representation of the definition.
-* Properties
- * `word`: The name of the definition. May have different capitalization from the original search and/or include other words
- * `definition`: The definition of the searched word
- * `example`: The example section of the definition
- * `author`: The username of the creator of the definition
- * `permalink`: Permanent link to the definition
- * `upvotes`: The amount of "thumbs up" ratings.
- * `downvotes`: The amount of "thumbs down" ratings.
- * `tts_samples`: Links to TTS samples of the word. Is used by `play_tts()`.
- * `written_on`: `datetime.datetime` representation of the creation time of the definition.
- * `raw_data`: `dict` representation of the API's JSON response
- * `index`: The word's index
+- Methods
+  * `todict()` <sub>`-> dict`</sub>: Returns a dictionary representation of the definition.
+- Properties
+  * `word`: The name of the definition. May have different capitalization from the original search and/or include other words
+  * `definition`: The definition of the searched word
+  * `example`: The example section of the definition
+  * `author`: The username of the creator of the definition
+  * `permalink`: Permanent link to the definition
+  * `upvotes`: The amount of "thumbs up" ratings.
+  * `downvotes`: The amount of "thumbs down" ratings.
+  * `tts_samples`: Links to TTS samples of the word. Is used by `play_tts()`.
+  * `written_on`: `datetime.datetime` representation of the creation time of the definition.
+  * `raw_data`: `dict` representation of the API's JSON response
+  * `index`: The word's index
 
     
 ### Exceptions
