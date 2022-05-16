@@ -60,10 +60,10 @@ Since this module is unofficial, it is not guaranteed to work if the Urban Dicti
 
 #### `define(word: str, index: int | None = 0)` <sub>`-> Definition | list[Definition]`</sub>
 - Fetches a definition from Urban Dictionary.
- * If `index` is `None`, returns a list of all definitions.
- * If `index` is an integer, returns the definition at the specified index.
- * If `index` is out of range, raises an error.
- * If the definition is not found, raises an error.
+  * If `index` is `None`, returns a list of all definitions.
+  * If `index` is an integer, returns the definition at the specified index.
+  * If `index` is out of range, raises an error.
+  * If the definition is not found, raises an error.
         
 #### `play_tts(word, index: int = 0, block: bool = True)` <sub>`-> None`</sub>
 - Plays a sound from a definition's TTS samples.
