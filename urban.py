@@ -43,7 +43,7 @@ class Definition:
             "permalink": self.permalink,
             "upvotes": self.upvotes,
             "downvotes": self.downvotes,
-            "sample_samples": self.sample_samples,
+            "audio_samples": self.audio_samples,
             "written_on": self.written_on,
             "raw_data": self.raw_data,
             "index": self.index
